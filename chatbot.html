@@ -246,34 +246,128 @@
                 
                 // Keyword-based responses
                 if (userMessage.includes('szia') || userMessage.includes('hello') || userMessage.includes('üdv')) {
-                    return "Jó napot! Örülök, hogy beszélgethetünk. Miben segíthetek?";
-                } else if (userMessage.includes('kösz') || userMessage.includes('köszi')) {
-                    return "Szívesen! Van még egyéb kérdése?";
-                } else if (userMessage.includes('fájdalom') || userMessage.includes('fáj')) {
-                    return "Sajnálom, hogy fájdalma van. Milyen típusú fájdalomról van szó, és hol lokalizálódik?";
-                } else if (userMessage.includes('láz') || userMessage.includes('lázas')) {
-                    return "Lázcsillapítók közül lehetősége van paracetamont vagy ibuprofent választani. Melyik érdekelné?";
-                } else if (userMessage.includes('paracetamol') || userMessage.includes('panadol')) {
-                    return "A paracetamol általános lázcsillapító és fájdalomcsillapító. Fontos, hogy ne lépje túl a napi maximális adagot!";
-                } else if (userMessage.includes('ibuprofen') || userMessage.includes('brufen')) {
-                    return "Az ibuprofen gyulladáscsökkentő hatású fájdalomcsillapító. Étkezés közben vagy után ajánlott bevenni, hogy megvédje a gyomor nyálkahártyáját.";
-                } else if (userMessage.includes('recept') || userMessage.includes('receptes')) {
-                    return "Receptes gyógyszerekhez orvosi előírás szükséges. Hozta magával a receptet, vagy szeretne gyógyszert rendelni?";
-                } else if (userMessage.includes('nátha') || userMessage.includes('megfázás')) {
-                    return "A megfázás és nátha tüneteire ajánlhatunk C-vitamint, cinkkészítményeket, orrsprayt vagy köptetőt. Melyik tünet dominál?";
-                } else if (userMessage.includes('allergia') || userMessage.includes('tüsszés')) {
-                    return "Allergiás panaszokra antihisztaminok állnak rendelkezésre. Választékunkban vannak cetirizin, loratadin és más modern antihisztaminok.";
-                } else if (userMessage.includes('bőr') || userMessage.includes('ekcéma')) {
-                    return "Bőrproblémákra hidratáló krémeket, kenőcsöket kínálunk. Pontosabban milyen bőrproblémáról van szó?";
-                } else if (userMessage.includes('árak') || userMessage.includes('mennyibe')) {
-                    return "A gyógyszerek ára változó, pontos információt adhatok termékenként. Melyik gyógyszer ára érdekelne?";
-                } else if (userMessage.includes('nyitva') || userMessage.includes('nyitvatartás')) {
-                    return "Hétfőtől péntekig 8:00-tól 20:00-ig, szombaton 9:00-tól 16:00-ig, vasárnap 10:00-tól 14:00-ig tartunk nyitva.";
-                } else if (userMessage.includes('viszlát') || userMessage.includes('pá') || userMessage.includes('vége')) {
-                    return "Köszönöm a beszélgetést! Remélem, segíthettem. További szép napot kívánok!";
-                } else {
-                    return "Elnézést, nem teljesen értettem. Kérem, fogalmazza meg másképp a kérdését, vagy érdeklődjön más gyógyszerrel kapcsolatban.";
-                }
+    return "Jó napot! Örülök, hogy beszélgethetünk. Miben segíthetek?";
+} else if (userMessage.includes('kösz') || userMessage.includes('köszi')) {
+    return "Szívesen! Van még egyéb kérdése?";
+} else if (userMessage.includes('fájdalom') || userMessage.includes('fáj')) {
+    return "Sajnálom, hogy fájdalma van. Milyen típusú fájdalomról van szó, és hol lokalizálódik?";
+} else if (userMessage.includes('láz') || userMessage.includes('lázas')) {
+    return "Lázcsillapítók közül lehetősége van paracetamont vagy ibuprofent választani. Melyik érdekelné?";
+} else if (userMessage.includes('paracetamol') || userMessage.includes('panadol')) {
+    return "A paracetamol általános lázcsillapító és fájdalomcsillapító. Fontos, hogy ne lépje túl a napi maximális adagot!";
+} else if (userMessage.includes('ibuprofen') || userMessage.includes('brufen')) {
+    return "Az ibuprofen gyulladáscsökkentő hatású fájdalomcsillapító. Étkezés közben vagy után ajánlott bevenni, hogy megvédje a gyomor nyálkahártyáját.";
+} else if (userMessage.includes('recept') || userMessage.includes('receptes')) {
+    return "Receptes gyógyszerekhez orvosi előírás szükséges. Hozta magával a receptet, vagy szeretne gyógyszert rendelni?";
+} else if (userMessage.includes('nátha') || userMessage.includes('megfázás')) {
+    return "A megfázás és nátha tüneteire ajánlhatunk C-vitamint, cinkkészítményeket, orrsprayt vagy köptetőt. Melyik tünet dominál?";
+} else if (userMessage.includes('allergia') || userMessage.includes('tüsszés')) {
+    return "Allergiás panaszokra antihisztaminok állnak rendelkezésre. Választékunkban vannak cetirizin, loratadin és más modern antihisztaminok.";
+} else if (userMessage.includes('bőr') || userMessage.includes('ekcéma')) {
+    return "Bőrproblémákra hidratáló krémeket, kenőcsöket kínálunk. Pontosabban milyen bőrproblémáról van szó?";
+} else if (userMessage.includes('árak') || userMessage.includes('mennyibe')) {
+    return "A gyógyszerek ára változó, pontos információt adhatok termékenként. Melyik gyógyszer ára érdekelne?";
+} else if (userMessage.includes('nyitva') || userMessage.includes('nyitvatartás')) {
+    return "Hétfőtől péntekig 8:00-tól 20:00-ig, szombaton 9:00-tól 16:00-ig, vasárnap 10:00-tól 14:00-ig tartunk nyitva.";
+} else if (userMessage.includes('viszlát') || userMessage.includes('pá') || userMessage.includes('vége')) {
+    return "Köszönöm a beszélgetést! Remélem, segíthettem. További szép napot kívánok!";
+} else if (userMessage.includes('köhögés') || userMessage.includes('köhögök')) {
+    return "Köhögésre számos szirup és köptető elérhető. Inkább száraz köhögésről vagy hurutos köhögésről van szó?";
+} else if (userMessage.includes('torokfájás') || userMessage.includes('kapar a torkom')) {
+    return "Torokfájásra szopogató tabletták és torokfertőtlenítő spray-k állnak rendelkezésre. Melyik tünet erősebb?";
+} else if (userMessage.includes('fejfájás') || userMessage.includes('migrén')) {
+    return "Fejfájás esetén paracetamol vagy ibuprofen is segíthet. Ha gyakori, érdemes orvossal konzultálni.";
+} else if (userMessage.includes('gyomor') || userMessage.includes('hasfájás')) {
+    return "Gyomorpanaszokra antacidumok, probiotikumok vagy savlekötők ajánlottak. Melyik tünet a legzavaróbb?";
+}
+ else if (userMessage.includes('szédülés') || userMessage.includes('forog a fejem')) {
+    return "Szédülés esetén fontos a folyadékbevitel és a pihenés. Ha gyakori, érdemes orvossal konzultálni.";
+} else if (userMessage.includes('hányinger') || userMessage.includes('hányok')) {
+    return "Hányinger esetén javasolt kis adagokban enni, folyadékot inni. Súlyos vagy tartós panasz esetén orvoshoz kell fordulni.";
+} else if (userMessage.includes('hasmenés') || userMessage.includes('hasmenek')) {
+    return "Hasmenés esetén folyadékpótlás és elektrolitok fogyasztása ajánlott. Ha 2-3 napnál tovább tart, keresse fel az orvost.";
+} else if (userMessage.includes('székrekedés') || userMessage.includes('nem tudok kakilni')) {
+    return "Székrekedés ellen rostban gazdag ételek, bő folyadék és mozgás segíthet. Tartós panasz esetén probiotikum vagy orvosi tanács javasolt.";
+} else if (userMessage.includes('lábfájás') || userMessage.includes('izomfájdalom')) {
+    return "Izom- vagy lábfájdalom esetén pihenés, meleg borogatás és fájdalomcsillapító segíthet. Ha duzzanat vagy erős fájdalom jelentkezik, keresse fel az orvost.";
+} else if (userMessage.includes('hőemelkedés') || userMessage.includes('gyenge láz')) {
+    return "Hőemelkedés esetén pihenés, folyadékpótlás és szükség esetén lázcsillapító segíthet. Ha a láz tartós vagy magas, forduljon orvoshoz.";
+} else if (userMessage.includes('c-vitamin') || userMessage.includes('vitamin c')) {
+    return "C-vitamin segíti az immunrendszer működését. Érdemes naponta a javasolt mennyiséget fogyasztani.";
+} else if (userMessage.includes('d-vitamin') || userMessage.includes('vitamin d')) {
+    return "D-vitamin fontos a csontok és az immunrendszer egészségéhez. Napfény és étrend-kiegészítő formájában is pótolható.";
+} else if (userMessage.includes('multivitamin') || userMessage.includes('több vitamin')) {
+    return "Multivitamin segíti a napi vitamin- és ásványianyag-bevitelt. Érdemes betartani az adagolást.";
+} else if (userMessage.includes('aszpirin') || userMessage.includes('acetilszalicilsav')) {
+    return "Aszpirin fájdalomcsillapító és gyulladáscsökkentő hatású. Gyomorvédő étkezés mellett ajánlott.";
+} else if (userMessage.includes('orrdugulás') || userMessage.includes('bedugult orr')) {
+    return "Orrdugulásra orrspray vagy sós vizes orröblítés ajánlott. Ne használja hosszabb ideig, mint 7 nap!";
+} else if (userMessage.includes('szemviszketés') || userMessage.includes('könnyezik a szemem')) {
+    return "Szemviszketésre műkönny vagy antihisztamin szemcsepp segíthet, allergiás tünetek esetén.";
+} else if (userMessage.includes('fülfájás') || userMessage.includes('fülgyulladás')) {
+    return "Fülfájás esetén fájdalomcsillapító javasolt. Ha a panasz tartós vagy erős, forduljon fül-orr-gégészhez.";
+} else if (userMessage.includes('ekcéma') || userMessage.includes('bőrkiütés')) {
+    return "Ekcéma és bőrkiütés esetén hidratáló krémek és speciális kenőcsök ajánlottak. Súlyos esetben bőrgyógyászhoz kell fordulni.";
+} else if (userMessage.includes('allergiás') || userMessage.includes('pollenallergia')) {
+    return "Allergiás tünetekre antihisztaminok vagy orrspray segíthet. Fontos az allergén elkerülése.";
+} else if (userMessage.includes('asztma') || userMessage.includes('nehezített légzés')) {
+    return "Asztma esetén fontos a rendszeres inhaláció és a roham esetén szükséges gyógyszer használata. Orvosi kontroll javasolt.";
+} else if (userMessage.includes('cukorbetegség') || userMessage.includes('diabétesz')) {
+    return "Cukorbetegség esetén a vércukorszint rendszeres ellenőrzése és az előírt gyógyszerek szedése alapvető. Életmódbeli tanácsokkal is segíthetünk.";
+} else if (userMessage.includes('magas vérnyomás') || userMessage.includes('hipertónia')) {
+    return "Magas vérnyomás esetén fontos a rendszeres mérés és az orvos által javasolt gyógyszerek szedése. Életmódváltás is segíthet.";
+} else if (userMessage.includes('szorongás') || userMessage.includes('stressz')) {
+    return "Szorongás és stressz esetén pihenés, relaxációs technikák, és szükség esetén pszichológus segíthet.";
+
+} else if (userMessage.includes('influenza') || userMessage.includes('influenzás')) {
+    return "Influenza esetén pihenés, folyadékpótlás és lázcsillapító segíthet. Szükség esetén orvoshoz kell fordulni.";
+} else if (userMessage.includes('torokgyulladás') || userMessage.includes('garatgyulladás')) {
+    return "Torokgyulladás esetén szopogató tabletták és torokfertőtlenítő spray használata javasolt. Súlyos esetben orvoshoz kell fordulni.";
+} else if (userMessage.includes('mandulagyulladás') || userMessage.includes('mandulák fájnak')) {
+    return "Mandulagyulladásnál fontos a pihenés és a fájdalomcsillapító. Ha bakteriális, orvos írhat fel antibiotikumot.";
+} else if (userMessage.includes('hasfájás') || userMessage.includes('gyomorfájás')) {
+    return "Hasfájás esetén pihenés, könnyű étkezés és szükség esetén gyomorvédő gyógyszer ajánlott.";
+} else if (userMessage.includes('hasi görcs') || userMessage.includes('hasi fájdalom')) {
+    return "Hasi görcsök esetén meleg borogatás, pihenés és enyhe fájdalomcsillapító segíthet.";
+} else if (userMessage.includes('gyerek láz') || userMessage.includes('gyermek lázas')) {
+    return "Gyermek láz esetén fontos a megfelelő folyadékbevitel és a korosztálynak megfelelő lázcsillapító adagolása. Szükség esetén orvoshoz kell fordulni.";
+} else if (userMessage.includes('oltás') || userMessage.includes('vakcina')) {
+    return "Oltásokkal kapcsolatos információk: melyik oltásra kíváncsi? Gyermek, influenza, vagy egyéb vakcina?";
+} else if (userMessage.includes('influenza oltás') || userMessage.includes('flu vakcina')) {
+    return "Influenza elleni oltást szezonálisan ajánlott beadni. Kérjük, érdeklődjön az aktuális készletekről.";
+} else if (userMessage.includes('tetánusz') || userMessage.includes('DTaP')) {
+    return "Tetanusz (DTaP) oltás gyermekeknek és felnőtteknek elérhető. Kérjük, konzultáljon háziorvosával az ütemezésről.";
+} else if (userMessage.includes('gyerekek vitamin') || userMessage.includes('gyermek vitamin')) {
+    return "Gyermekek számára multivitaminok és D-vitamin ajánlott. Adagolást mindig a korcsoport szerint válassza.";
+} else if (userMessage.includes('terhes vitamin') || userMessage.includes('folsav')) {
+    return "Terhes nők számára folsav és multivitaminok ajánlottak a magzat egészsége érdekében. Konzultáljon nőgyógyásszal.";
+} else if (userMessage.includes('fogfájás') || userMessage.includes('fog fáj')) {
+    return "Fogfájás esetén fájdalomcsillapító segíthet, de tartós fájdalom esetén fogorvosi vizsgálat szükséges.";
+} else if (userMessage.includes('arcfájdalom') || userMessage.includes('arcüreg fájdalom')) {
+    return "Arcüreggyulladás esetén orrspray, orröblítés és fájdalomcsillapító javasolt. Ha tünetek súlyosak, forduljon orvoshoz.";
+} else if (userMessage.includes('lábdagadás') || userMessage.includes('ödéma')) {
+    return "Lábdagadásnál fontos a pihenés, lábemelés és sóbevitel csökkentése. Tartós panasz esetén orvoshoz kell fordulni.";
+} else if (userMessage.includes('köhögéscsillapító') || userMessage.includes('szirup köhögésre')) {
+    return "Köhögésre számos szirup áll rendelkezésre: száraz köhögésre köhögéscsillapító, hurutosra köptető.";
+} else if (userMessage.includes('influenza tünetei') || userMessage.includes('influenzás vagyok')) {
+    return "Influenza tünetei: láz, torokfájás, izomfájdalom, köhögés. Pihenés és folyadékpótlás ajánlott.";
+} else if (userMessage.includes('cukor') || userMessage.includes('cukorbeteg')) {
+    return "Cukorbetegség esetén fontos a vércukorszint rendszeres ellenőrzése és az orvos által előírt gyógyszerek szedése.";
+} else if (userMessage.includes('szív') || userMessage.includes('szívpanasz')) {
+    return "Szívpanaszok esetén azonnali orvosi vizsgálat javasolt. Ha akut fájdalom jelentkezik, hívjon mentőt!";
+} else if (userMessage.includes('magas koleszterin') || userMessage.includes('hiperkoleszterinémia')) {
+    return "Magas koleszterin esetén étrend- és életmódváltás, szükség esetén gyógyszeres kezelés javasolt.";
+} else if (userMessage.includes('gyomorfekély') || userMessage.includes('fekély')) {
+    return "Gyomorfekély esetén gyomorsavcsökkentők és orvosi kontroll szükséges. Kerülni kell a fűszeres, savas ételeket.";
+} else if (userMessage.includes('szorulás') || userMessage.includes('székrekedés')) {
+    return "Székrekedés esetén rostban gazdag ételek, bő folyadék és mozgás segíthet. Tartós panasz esetén probiotikum javasolt.";
+} else if (userMessage.includes('emésztési zavar') || userMessage.includes('gyomorégés')) {
+    return "Emésztési zavar vagy gyomorégés esetén könnyű ételek, kevés fűszer, gyomorsavcsökkentő gyógyszer ajánlott.";
+}
+ else {
+    return "Elnézést, nem teljesen értettem. Kérem, fogalmazza meg másképp a kérdését, vagy érdeklődjön más gyógyszerrel kapcsolatban.";
+}
+
             }
             
             // Function to handle sending message
