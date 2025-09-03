@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyógyszertári Asszisztens</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+            padding: 20px;
+        }
+        
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            height: 600px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #fafafa;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: #e3f2fd;
+            border-bottom-left-radius: 4px;
+            color: #1565c0;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: #2196f3;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .chat-input input:focus {
+            border-color: #42a5f5;
+        }
+        
+        .chat-input button {
+            margin-left: 10px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        .chat-input button:hover {
+            background-color: #1976d2;
+        }
+        
+        .timestamp {
+            font-size: 0.7rem;
+            margin-top: 5px;
+            opacity: 0.7;
+            text-align: right;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media (max-width: 600px) {
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1><i class="fas fa-prescription"></i> Gyógyszertári Asszisztens</h1>
+            <div class="header-controls">
+                <button id="minimize-btn"><i class="fas fa-minus"></i></button>
+                <button id="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <div class="welcome-text">Üdvözöljük a gyógyszertári chat-asszisztensünkben!</div>
+            <div class="message bot-message">
+                Jó napot! Üdvözöljük a PharmaCare Gyógyszertárban! Hogyan segíthetek Önnek ma?
+                <div class="timestamp" id="timestamp">Épp most</div>
+            </div>
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Írja be üzenetét..." autocomplete="off">
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const minimizeBtn = document.getElementById('minimize-btn');
+            let isMinimized = false;
+            
+            // Focus on input field when page loads
+            userInput.focus();
+            
+            // Function to add user message to chat
+            function addUserMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', 'user-message');
+                messageElement.textContent = message;
+                
+                const timestamp = document.createElement('div');
+                timestamp.classList.add('timestamp');
+                timestamp.textContent = getCurrentTime();
+                
+                messageElement.appendChild(timestamp);
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+            
+            // Function to add bot message to chat
+            function addBotMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', 'bot-message');
+                messageElement.textContent = message;
+                
+                const timestamp = document.createElement('div');
+                timestamp.classList.add('timestamp');
+                timestamp.textContent = getCurrentTime();
+                
+                messageElement.appendChild(timestamp);
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+            
+            // Function to get current time for timestamp
+            function getCurrentTime() {
+                const now = new Date();
+                return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            // Function to scroll to bottom of chat
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to generate bot response based on user input
+            function generateResponse(userMessage) {
+                userMessage = userMessage.toLowerCase();
+                
+                // Keyword-based responses
+                if (userMessage.includes('szia') || userMessage.includes('hello') || userMessage.includes('üdv')) {
+                    return "Jó napot! Örülök, hogy beszélgethetünk. Miben segíthetek?";
+                } else if (userMessage.includes('kösz') || userMessage.includes('köszi')) {
+                    return "Szívesen! Van még egyéb kérdése?";
+                } else if (userMessage.includes('fájdalom') || userMessage.includes('fáj')) {
+                    return "Sajnálom, hogy fájdalma van. Milyen típusú fájdalomról van szó, és hol lokalizálódik?";
+                } else if (userMessage.includes('láz') || userMessage.includes('lázas')) {
+                    return "Lázcsillapítók közül lehetősége van paracetamont vagy ibuprofent választani. Melyik érdekelné?";
+                } else if (userMessage.includes('paracetamol') || userMessage.includes('panadol')) {
+                    return "A paracetamol általános lázcsillapító és fájdalomcsillapító. Fontos, hogy ne lépje túl a napi maximális adagot!";
+                } else if (userMessage.includes('ibuprofen') || userMessage.includes('brufen')) {
+                    return "Az ibuprofen gyulladáscsökkentő hatású fájdalomcsillapító. Étkezés közben vagy után ajánlott bevenni, hogy megvédje a gyomor nyálkahártyáját.";
+                } else if (userMessage.includes('recept') || userMessage.includes('receptes')) {
+                    return "Receptes gyógyszerekhez orvosi előírás szükséges. Hozta magával a receptet, vagy szeretne gyógyszert rendelni?";
+                } else if (userMessage.includes('nátha') || userMessage.includes('megfázás')) {
+                    return "A megfázás és nátha tüneteire ajánlhatunk C-vitamint, cinkkészítményeket, orrsprayt vagy köptetőt. Melyik tünet dominál?";
+                } else if (userMessage.includes('allergia') || userMessage.includes('tüsszés')) {
+                    return "Allergiás panaszokra antihisztaminok állnak rendelkezésre. Választékunkban vannak cetirizin, loratadin és más modern antihisztaminok.";
+                } else if (userMessage.includes('bőr') || userMessage.includes('ekcéma')) {
+                    return "Bőrproblémákra hidratáló krémeket, kenőcsöket kínálunk. Pontosabban milyen bőrproblémáról van szó?";
+                } else if (userMessage.includes('árak') || userMessage.includes('mennyibe')) {
+                    return "A gyógyszerek ára változó, pontos információt adhatok termékenként. Melyik gyógyszer ára érdekelne?";
+                } else if (userMessage.includes('nyitva') || userMessage.includes('nyitvatartás')) {
+                    return "Hétfőtől péntekig 8:00-tól 20:00-ig, szombaton 9:00-tól 16:00-ig, vasárnap 10:00-tól 14:00-ig tartunk nyitva.";
+                } else if (userMessage.includes('viszlát') || userMessage.includes('pá') || userMessage.includes('vége')) {
+                    return "Köszönöm a beszélgetést! Remélem, segíthettem. További szép napot kívánok!";
+                } else {
+                    return "Elnézést, nem teljesen értettem. Kérem, fogalmazza meg másképp a kérdését, vagy érdeklődjön más gyógyszerrel kapcsolatban.";
+                }
+            }
+            
+            // Function to handle sending message
+            function handleSend() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addUserMessage(message);
+                    userInput.value = '';
+                    
+                    // Simulate thinking delay
+                    setTimeout(() => {
+                        const response = generateResponse(message);
+                        addBotMessage(response);
+                    }, 1000);
+                }
+            }
+            
+            // Event listeners
+            sendBtn.addEventListener('click', handleSend);
+            
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSend();
+                }
+            });
+            
+            closeBtn.addEventListener('click', function() {
+                alert("A chat ablak bezárása előtt győződjön meg róla, hogy minden kérdésére választ kapott!");
+            });
+            
+            minimizeBtn.addEventListener('click', function() {
+                const messagesContainer = document.getElementById('chat-messages');
+                const inputContainer = document.querySelector('.chat-input');
+                
+                if (isMinimized) {
+                    messagesContainer.style.display = 'flex';
+                    inputContainer.style.display = 'flex';
+                    isMinimized = false;
+                } else {
+                    messagesContainer.style.display = 'none';
+                    inputContainer.style.display = 'none';
+                    isMinimized = true;
+                }
+            });
+            
+            // Initial greeting with delay
+            setTimeout(() => {
+                addBotMessage("Kérdezzen nyugodtan gyógyszerekkel, egészségügyi termékekkel vagy egészségügyi problémákkal kapcsolatban!");
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
